@@ -86,6 +86,86 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/MyAutoCompleteOriginal.js":
+/*!***************************************!*\
+  !*** ./src/MyAutoCompleteOriginal.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'react-contenteditable'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var MyAutocomplete = function MyAutocomplete() {
+  console.log("sss");
+  var autocompleters = [{
+    name: 'fruit',
+    // The prefix that triggers this completer
+    triggerPrefix: '~',
+    // The option data
+    options: [{
+      visual: '🍎',
+      name: 'Apple',
+      id: 1
+    }, {
+      visual: '🍊',
+      name: 'Orange',
+      id: 2
+    }, {
+      visual: '🍇',
+      name: 'Grapes',
+      id: 3
+    }],
+    // Returns a label for an option like "🍊 Orange"
+    getOptionLabel: function getOptionLabel(option) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+        className: "icon"
+      }, option.visual), option.name);
+    },
+    // Declares that options should be matched by their name
+    getOptionKeywords: function getOptionKeywords(option) {
+      return [option.name];
+    },
+    // Declares that the Grapes option is disabled
+    isOptionDisabled: function isOptionDisabled(option) {
+      return option.name === 'Grapes';
+    },
+    // Declares completions should be inserted as abbreviations
+    getOptionCompletion: function getOptionCompletion(option) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("abbr", {
+        title: option.name
+      }, option.visual);
+    }
+  }];
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Autocomplete"], {
+    completers: autocompleters
+  }, function (_ref) {
+    var isExpanded = _ref.isExpanded,
+        listBoxId = _ref.listBoxId,
+        activeId = _ref.activeId;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      contentEditable: true,
+      suppressContentEditableWarning: true,
+      "aria-autocomplete": "list",
+      "aria-expanded": isExpanded,
+      "aria-owns": listBoxId,
+      "aria-activedescendant": activeId
+    });
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Type ~ for triggering the autocomplete."));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MyAutocomplete);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -97,70 +177,41 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/rich-text */ "@wordpress/rich-text");
-/* harmony import */ var _wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _MyAutoCompleteOriginal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyAutoCompleteOriginal */ "./src/MyAutoCompleteOriginal.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+
+ // adjust if you saved this file somewhere else.
 
 
-
-
-
-
-var MyPopover = Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__["withState"])({
-  isVisible: false
-})(function (_ref) {
-  var isVisible = _ref.isVisible,
-      setState = _ref.setState;
-
-  var toggleVisible = function toggleVisible() {
-    setState(function (state) {
-      return {
-        isVisible: !state.isVisible
-      };
-    });
-  };
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["KeyboardShortcuts"], {
-    bindGlobal: true,
-    shortcuts: {
-      'mod+e': toggleVisible
-    }
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    icon: "edit",
-    onClick: toggleVisible
-  }, "Toggle Popover!", isVisible && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Popover"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: ""
-  }, "Popover is toggled!")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: ""
-  }, "Popover is toggled!")))));
-});
-
-var MyCustomButton = function MyCustomButton(props) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["BlockControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Toolbar"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MyPopover, null)));
-};
-
-Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__["registerFormatType"])('my-custom-format/sample-output', {
-  title: 'Sample output',
-  tagName: 'samp',
-  className: null,
-  edit: MyCustomButton
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('create-block/gutenpride', {
+  title: 'Gutenpride',
+  description: 'Example block.',
+  category: 'formatting',
+  icon: 'smiley',
+  supports: {
+    // Removes support for an HTML mode.
+    html: false
+  },
+  edit: function edit() {
+    console.log("sss");
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_MyAutoCompleteOriginal__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  },
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, " Hello in Save.");
+  }
 });
 
 /***/ }),
 
-/***/ "@wordpress/block-editor":
-/*!**********************************************!*\
-  !*** external {"this":["wp","blockEditor"]} ***!
-  \**********************************************/
+/***/ "@wordpress/blocks":
+/*!*****************************************!*\
+  !*** external {"this":["wp","blocks"]} ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["wp"]["blockEditor"]; }());
+(function() { module.exports = this["wp"]["blocks"]; }());
 
 /***/ }),
 
@@ -175,17 +226,6 @@ Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__["registerFormatType"])(
 
 /***/ }),
 
-/***/ "@wordpress/compose":
-/*!******************************************!*\
-  !*** external {"this":["wp","compose"]} ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["compose"]; }());
-
-/***/ }),
-
 /***/ "@wordpress/element":
 /*!******************************************!*\
   !*** external {"this":["wp","element"]} ***!
@@ -194,17 +234,6 @@ Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_1__["registerFormatType"])(
 /***/ (function(module, exports) {
 
 (function() { module.exports = this["wp"]["element"]; }());
-
-/***/ }),
-
-/***/ "@wordpress/rich-text":
-/*!*******************************************!*\
-  !*** external {"this":["wp","richText"]} ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = this["wp"]["richText"]; }());
 
 /***/ })
 
